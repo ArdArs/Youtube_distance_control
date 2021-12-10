@@ -1,0 +1,1 @@
+#include <IRremote.h>#define PIN_IK 2IRrecv irrecv(PIN_IK);decode_results ir;void setup(){	Serial.begin(9600);	irrecv.enableIRIn();}void loop(){	static uint32_t actual_code;	if (irrecv.decode(&ir)) {		if (ir.value != 0xffffffff)			actual_code = ir.value;		Serial.print("Reciving: ");		Serial.println(ir.value, HEX);		irrecv.resume();	}}
